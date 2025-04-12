@@ -22,7 +22,7 @@ def configurar_pagina():
     st.set_page_config(page_title="Clasificador de Texto", layout="wide")
     st.markdown("""
         <style>
-            .main .block-container { max-width: 95%; padding-left: 3rem; padding-right: 3rem; }
+            .main .block-container { max-width: 60%; padding-left: 3rem; padding-right: 3rem; }
             pre { white-space: pre-wrap !important; word-break: break-word !important; }
         </style>
     """, unsafe_allow_html=True)
@@ -72,8 +72,8 @@ def reentrenar_modelo(df, data, T, label2idx, tokenizer):
     K = len(label2idx)
 
     modelo = construir_modelo(V, T, K)
-    X_train, X_test, y_train, y_test = train_test_split(data, df['target'].values, test_size=0.3, random_state=42)
-    history = modelo.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
+    X_train, X_test, y_train, y_test = train_test_split(data, df['target'].values, test_size=0.3)
+    history = modelo.fit(X_train, y_train, epochs=50, validation_data=(X_test, y_test))
 
     modelo.save('modelo23.keras')
     with open('historial_entrenamiento_23.pkl', 'wb') as f:
@@ -133,7 +133,7 @@ def mostrar_historial_entrenamiento():
 # === Matriz de Confusión ===
 def mostrar_matriz_confusion(df, modelo, tokenizer, T, idx2label):
     try:
-        _, df_test = train_test_split(df, test_size=0.3, random_state=42)
+        _, df_test = train_test_split(df, test_size=0.3)
         X_test = pad_sequences(tokenizer.texts_to_sequences(df_test['news']), maxlen=T)
         y_test = df_test['target'].values
 
@@ -160,7 +160,7 @@ def mostrar_distribucion_clases(df):
 # === Evaluación del Modelo ===
 def evaluar_modelo(df, modelo, tokenizer, T):
     try:
-        _, df_test = train_test_split(df, test_size=0.3, random_state=42)
+        _, df_test = train_test_split(df, test_size=0.3)
         X_test = pad_sequences(tokenizer.texts_to_sequences(df_test['news']), maxlen=T)
         y_test = df_test['target'].values
 

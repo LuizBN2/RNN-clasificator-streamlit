@@ -14,7 +14,7 @@ def configurar_pagina():
     st.markdown("""
         <style>
             .main .block-container {
-                max-width: 95%;
+                max-width: 60%;
                 padding-left: 3rem;
                 padding-right: 3rem;
             }
