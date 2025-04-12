@@ -106,7 +106,7 @@ def mostrar_arquitectura(modelo, dot_output_path, png_output_path):
             st.warning(f"⚠️ No se pudo generar el diagrama: {e}")
 
     if os.path.exists(png_output_path):
-        st.image(png_output_path, caption="Estructura de la red neuronal", use_container_width=True)
+        st.image(png_output_path, caption="Estructura de la red neuronal", use_column_width=True)
 
         with open(png_output_path, "rb") as file:
             st.download_button(
