@@ -50,7 +50,7 @@ def cargar_datos_tokenizer():
 def preprocesar_texto(df, tokenizer):
     sequences = tokenizer.texts_to_sequences(df['news'])
     data = pad_sequences(sequences)
-    T = data.shape[1]
+    T = 3015    
     return data, T
 
 
@@ -72,7 +72,7 @@ def reentrenar_modelo(df, data, T, label2idx, tokenizer):
     K = len(label2idx)
 
     modelo = construir_modelo(V, T, K)
-    X_train, X_test, y_train, y_test = train_test_split(data, df['target'].values, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(data, df['target'].values, test_size=0.3, random_state=42)
     history = modelo.fit(X_train, y_train, epochs=50, validation_data=(X_test, y_test))
 
     modelo.save('modelo23.keras')
@@ -133,7 +133,7 @@ def mostrar_historial_entrenamiento():
 # === Matriz de Confusión ===
 def mostrar_matriz_confusion(df, modelo, tokenizer, T, idx2label):
     try:
-        _, df_test = train_test_split(df, test_size=0.3)
+        _, df_test = train_test_split(df, test_size=0.3, random_state=42)
         X_test = pad_sequences(tokenizer.texts_to_sequences(df_test['news']), maxlen=T)
         y_test = df_test['target'].values
 
@@ -160,7 +160,7 @@ def mostrar_distribucion_clases(df):
 # === Evaluación del Modelo ===
 def evaluar_modelo(df, modelo, tokenizer, T):
     try:
-        _, df_test = train_test_split(df, test_size=0.3)
+        _, df_test = train_test_split(df, test_size=0.3, random_state=42)
         X_test = pad_sequences(tokenizer.texts_to_sequences(df_test['news']), maxlen=T)
         y_test = df_test['target'].values
 
