@@ -1,0 +1,37 @@
+digraph G {
+    rankdir=TB;
+    concentrate=true;
+    dpi=200;
+    splines=ortho;
+    node [shape=plaintext fontname=Helvetica];
+
+    layer_0 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" BGCOLOR="#f0f0f0">
+  <TR><TD COLSPAN="2"><B>input_layer</B> (InputLayer)</TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Input</FONT></TD><TD><FONT POINT-SIZE="10">?</FONT></TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Output</FONT></TD><TD><FONT POINT-SIZE="10">(None, 3015)</FONT></TD></TR>
+</TABLE>>];
+    layer_1 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" BGCOLOR="#dcedc8">
+  <TR><TD COLSPAN="2"><B>embedding</B> (Embedding)</TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Input</FONT></TD><TD><FONT POINT-SIZE="10">(None, 3015)</FONT></TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Output</FONT></TD><TD><FONT POINT-SIZE="10">(None, 3015, 20)</FONT></TD></TR>
+</TABLE>>];
+    layer_2 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" BGCOLOR="#ffccbc">
+  <TR><TD COLSPAN="2"><B>lstm</B> (LSTM)</TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Input</FONT></TD><TD><FONT POINT-SIZE="10">(None, 3015, 20)</FONT></TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Output</FONT></TD><TD><FONT POINT-SIZE="10">(None, 3015, 32)</FONT></TD></TR>
+</TABLE>>];
+    layer_3 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" BGCOLOR="#ffe082">
+  <TR><TD COLSPAN="2"><B>global_max_pooling1d</B> (GlobalMaxPooling1D)</TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Input</FONT></TD><TD><FONT POINT-SIZE="10">(None, 3015, 32)</FONT></TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Output</FONT></TD><TD><FONT POINT-SIZE="10">(None, 32)</FONT></TD></TR>
+</TABLE>>];
+    layer_4 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" BGCOLOR="#bbdefb">
+  <TR><TD COLSPAN="2"><B>dense</B> (Dense)</TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Input</FONT></TD><TD><FONT POINT-SIZE="10">(None, 32)</FONT></TD></TR>
+  <TR><TD><FONT POINT-SIZE="10">Output</FONT></TD><TD><FONT POINT-SIZE="10">(None, 7)</FONT></TD></TR>
+</TABLE>>];
+    layer_0 -> layer_1;
+    layer_1 -> layer_2;
+    layer_2 -> layer_3;
+    layer_3 -> layer_4;
+}

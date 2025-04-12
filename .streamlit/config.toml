@@ -1,0 +1,18 @@
+[theme]
+base="light"
+primaryColor="#13d3d6"
+secondaryBackgroundColor="#abecd7"
+textColor="#273aaa"
+
+[server]
+runOnSave = true
+
+[client]
+showSidebarNavigation = false
+
+
+[ui]
+hideSidebarNav = false
+sidebarState = "expanded"
+
+
